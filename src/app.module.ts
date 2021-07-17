@@ -17,7 +17,9 @@ import { CharacterModule } from './character/character.module';
       //   fieldMiddleware: [loggerMiddleware],
       // },
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/12-reinos-db'),
+    MongooseModule.forRoot('mongodb://localhost:27017/12-reinos-db', {
+      useFindAndModify: false,
+    }),
     CharacterModule,
   ],
 })

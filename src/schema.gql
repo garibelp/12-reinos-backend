@@ -3,17 +3,58 @@
 # ------------------------------------------------------
 
 type Character {
+  Astucia: Int!
+  Celeridade: Int!
+  Intelecto: Int!
+  Tenacidade: Int!
   _id: String!
+  aptitudeList: [String!]!
+  background: String!
+  currentArmor: Int!
+  currentLife: Int!
+  currentMana: Int!
+  defective: Boolean
+  enhancedAttribute: String
+  job: String!
+  level: Int!
   name: String!
+  race: String!
+  subclass: String
+  totalArmor: Int!
+  totalLife: Int!
+  totalMana: Int!
 }
 
 input CreateCharacterInput {
+  Astucia: Int!
+  Celeridade: Int!
+  Intelecto: Int!
+  Tenacidade: Int!
+  aptitudeList: [String!]!
+  background: String!
+  currentArmor: Int!
+  currentLife: Int!
+  currentMana: Int!
+  defective: Boolean
+  enhancedAttribute: String
+  job: String!
+  level: Int!
   name: String!
+  race: String!
+  subclass: String
+  totalArmor: Int!
+  totalLife: Int!
+  totalMana: Int!
 }
 
 input ListCharacterInput {
   _id: String
+  background: String
+  job: String
+  level: Int
   name: String
+  race: String
+  subclass: String
 }
 
 type Mutation {
@@ -29,5 +70,15 @@ type Query {
 
 input UpdateCharacterInput {
   _id: String!
-  name: String
+  aptitudeList: [String!]
+  currentArmor: Int
+  currentLife: Int
+  currentMana: Int
+  defective: Boolean
+  enhancedAttribute: String
+  level: Int
+  subclass: String
+  totalArmor: Int
+  totalLife: Int
+  totalMana: Int
 }
