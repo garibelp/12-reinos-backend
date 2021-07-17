@@ -1,11 +1,24 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GraphQLModule } from '@nestjs/graphql';
+import { MongooseModule } from '@nestjs/mongoose';
+import { join } from 'path';
+
 import { CharacterModule } from './character/character.module';
+// import { loggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
-  imports: [CharacterModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    GraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      sortSchema: true,
+      debug: false,
+      // Loggger interceptor of graphql requests
+      // buildSchemaOptions: {
+      //   fieldMiddleware: [loggerMiddleware],
+      // },
+    }),
+    MongooseModule.forRoot('mongodb://localhost:27017/12-reinos-db'),
+    CharacterModule,
+  ],
 })
 export class AppModule {}

@@ -1,14 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
+import { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql';
 
-export function logger(req: Request, res: Response, next: NextFunction) {
-  const date: string = new Date().toLocaleDateString('pt-br', {
-    second: '2-digit',
-    minute: '2-digit',
-    hour: '2-digit',
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  });
-  console.log(`[${date}][${req.method}] - ${req.url}`);
-  next();
-}
+export const loggerMiddleware: FieldMiddleware = async (
+  ctx: MiddlewareContext,
+  next: NextFn,
+) => {
+  const value = await next();
+  console.log(value);
+  return value;
+};

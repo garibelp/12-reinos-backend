@@ -1,34 +1,42 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCharacterDto } from './dto/create-character.dto';
-import { UpdateCharacterDto } from './dto/update-character.dto';
-import { Character } from './entities/character.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, Schema as MongooseSchema } from 'mongoose';
+
+import {
+  CreateCharacterInput,
+  ListCharacterInput,
+  UpdateCharacterInput,
+} from './character.input';
+import { Character, CharacterDocument } from './model/character.model';
 
 @Injectable()
 export class CharacterService {
-  readonly charList: Character[] = [];
+  constructor(
+    @InjectModel(Character.name)
+    private characterModel: Model<CharacterDocument>,
+  ) {}
 
-  create(createCharacterDto: CreateCharacterDto): number {
-    const id: number = Math.floor(Math.random() * 10);
-    this.charList.push({
-      id,
-      ...createCharacterDto,
-    });
-    return id;
+  create(payload: CreateCharacterInput) {
+    return new this.characterModel(payload).save();
   }
 
-  findAll(): Character[] {
-    return this.charList;
+  getById(_id: MongooseSchema.Types.ObjectId) {
+    return this.characterModel.findById(_id).exec();
   }
 
-  findOne(id: number): Character {
-    return this.charList.find((c) => c.id === id);
+  list(filters: ListCharacterInput) {
+    return this.characterModel.find({ ...filters }).exec();
   }
 
-  update(id: number, updateCharacterDto: UpdateCharacterDto) {
-    return `This action updates a #${id} character`;
+  update(payload: UpdateCharacterInput) {
+    return this.characterModel
+      .findByIdAndUpdate(payload._id, payload, {
+        new: true,
+      })
+      .exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} character`;
+  delete(_id: MongooseSchema.Types.ObjectId) {
+    return this.characterModel.findByIdAndDelete(_id).exec();
   }
 }

@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Character {
+  _id: String!
+  name: String!
+}
+
+input CreateCharacterInput {
+  name: String!
+}
+
+input ListCharacterInput {
+  _id: String
+  name: String
+}
+
+type Mutation {
+  createCharacter(payload: CreateCharacterInput!): Character!
+  deleteCharacter(_id: String!): Character!
+  updateCharacter(payload: UpdateCharacterInput!): Character!
+}
+
+type Query {
+  character(_id: String!): Character!
+  characters(filters: ListCharacterInput): [Character!]!
+}
+
+input UpdateCharacterInput {
+  _id: String!
+  name: String
+}
