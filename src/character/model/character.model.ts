@@ -66,21 +66,21 @@ export class Character {
   @Prop()
   enhancedAttribute?: AttributeEnum;
 
-  @Field(() => Int)
+  @Field(() => [Int])
   @Prop()
-  [AttributeEnum.TEN]: number;
+  [AttributeEnum.TEN]: number[];
 
-  @Field(() => Int)
+  @Field(() => [Int])
   @Prop()
-  [AttributeEnum.AST]: number;
+  [AttributeEnum.AST]: number[];
 
-  @Field(() => Int)
+  @Field(() => [Int])
   @Prop()
-  [AttributeEnum.CEL]: number;
+  [AttributeEnum.CEL]: number[];
 
-  @Field(() => Int)
+  @Field(() => [Int])
   @Prop()
-  [AttributeEnum.INT]: number;
+  [AttributeEnum.INT]: number[];
 
   @Field(() => [String])
   @Prop()

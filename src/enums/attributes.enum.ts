@@ -1,8 +1,8 @@
 enum AttributeEnum {
-  TEN = 'Tenacidade',
-  CEL = 'Celeridade',
-  INT = 'Intelecto',
-  AST = 'Astucia',
+  TEN = 'TEN',
+  CEL = 'CEL',
+  INT = 'INT',
+  AST = 'AST',
 }
 
 export default AttributeEnum;

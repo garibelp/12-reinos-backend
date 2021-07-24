@@ -46,17 +46,17 @@ export class CreateCharacterInput {
   @Field(() => String, { nullable: true })
   enhancedAttribute?: AttributeEnum;
 
-  @Field(() => Int)
-  [AttributeEnum.TEN]: number;
+  @Field(() => [Int])
+  [AttributeEnum.TEN]: number[];
 
-  @Field(() => Int)
-  [AttributeEnum.AST]: number;
+  @Field(() => [Int])
+  [AttributeEnum.AST]: number[];
 
-  @Field(() => Int)
-  [AttributeEnum.CEL]: number;
+  @Field(() => [Int])
+  [AttributeEnum.CEL]: number[];
 
-  @Field(() => Int)
-  [AttributeEnum.INT]: number;
+  @Field(() => [Int])
+  [AttributeEnum.INT]: number[];
 
   @Field(() => [String])
   aptitudeList: [string];
@@ -123,4 +123,16 @@ export class UpdateCharacterInput {
 
   @Field(() => [String], { nullable: true })
   aptitudeList?: [string];
+
+  @Field(() => [Int], { nullable: true })
+  [AttributeEnum.TEN]?: number[];
+
+  @Field(() => [Int], { nullable: true })
+  [AttributeEnum.AST]?: number[];
+
+  @Field(() => [Int], { nullable: true })
+  [AttributeEnum.CEL]?: number[];
+
+  @Field(() => [Int], { nullable: true })
+  [AttributeEnum.INT]?: number[];
 }
