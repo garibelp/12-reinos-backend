@@ -13,7 +13,7 @@ import { Character, CharacterDocument } from './model/character.model';
 export class CharacterService {
   constructor(
     @InjectModel(Character.name)
-    private characterModel: Model<CharacterDocument>,
+    private readonly characterModel: Model<CharacterDocument>,
   ) {}
 
   create(payload: CreateCharacterInput) {

@@ -11,7 +11,7 @@ import { Character } from './model/character.model';
 
 @Resolver()
 export class CharacterResolver {
-  constructor(private characterService: CharacterService) {}
+  constructor(private readonly characterService: CharacterService) {}
 
   @Query(() => Character)
   async character(

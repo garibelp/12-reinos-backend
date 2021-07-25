@@ -5,6 +5,7 @@ import { join } from 'path';
 
 import { CharacterModule } from './character/character.module';
 // import { loggerMiddleware } from './middleware/logger.middleware';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CharacterModule } from './character/character.module';
       },
     ),
     CharacterModule,
+    UserModule,
   ],
 })
 export class AppModule {}
