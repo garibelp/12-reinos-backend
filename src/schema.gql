@@ -48,8 +48,8 @@ input CreateCharacterInput {
 }
 
 input CreateUserInput {
+  email: String!
   password: String!
-  username: String!
 }
 
 """
@@ -101,5 +101,5 @@ input UpdateCharacterInput {
 type User {
   _id: String!
   createdAt: DateTime!
-  username: String!
+  email: String!
 }

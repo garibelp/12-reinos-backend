@@ -13,11 +13,16 @@ export class UserService {
     private readonly userModel: Model<UserDocument>,
   ) {}
 
-  create(payload: CreateUserInput) {
+  async create(payload: CreateUserInput) {
+    const hashedPassword = await bcrypt.hash(payload.password, 10);
     return new this.userModel({
       ...payload,
-      password: bcrypt.hashSync(payload.password, 10),
+      password: hashedPassword,
       createdAt: new Date(),
     }).save();
+  }
+
+  getByEmail(email: string) {
+    return this.userModel.findOne({ email }).exec();
   }
 }

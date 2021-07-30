@@ -10,7 +10,7 @@ export class User {
 
   @Field(() => String)
   @Prop({ unique: true })
-  username: string;
+  email: string;
 
   @Prop()
   password: string;

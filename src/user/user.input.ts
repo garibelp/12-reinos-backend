@@ -6,7 +6,7 @@ export class CreateUserInput {
   @Field(() => String)
   @MinLength(6)
   @MaxLength(20)
-  username: string;
+  email: string;
 
   @Field(() => String)
   @MinLength(8)
