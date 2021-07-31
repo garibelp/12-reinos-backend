@@ -38,8 +38,11 @@ export class CharacterResolver {
 
   @Mutation(() => Character)
   @UseGuards(GqlAuthGuard)
-  async createCharacter(@Args('payload') payload: CreateCharacterInput) {
-    return this.characterService.create(payload);
+  async createCharacter(
+    @CurrentUser() user: User,
+    @Args('payload') payload: CreateCharacterInput,
+  ) {
+    return this.characterService.create(payload, user);
   }
 
   @Mutation(() => Character)

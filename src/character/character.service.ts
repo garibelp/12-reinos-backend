@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
+import { User } from 'src/user/model/user.model';
 
 import {
   CreateCharacterInput,
@@ -16,8 +17,11 @@ export class CharacterService {
     private readonly characterModel: Model<CharacterDocument>,
   ) {}
 
-  create(payload: CreateCharacterInput) {
-    return new this.characterModel(payload).save();
+  create(payload: CreateCharacterInput, user: User) {
+    return new this.characterModel({
+      ...payload,
+      user: user._id,
+    }).save();
   }
 
   getById(_id: MongooseSchema.Types.ObjectId) {

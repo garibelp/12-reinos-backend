@@ -3,12 +3,16 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
 import AttributeEnum from 'src/enums/attributes.enum';
+import { User } from 'src/user/model/user.model';
 
 @ObjectType()
 @Schema()
 export class Character {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
+  user: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
   @Prop()
