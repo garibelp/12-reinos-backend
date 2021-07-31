@@ -28,11 +28,14 @@ export class AuthService {
       sub: user._id,
     });
 
-    await this.userService.update({
-      _id: user._id,
-      lastToken: accessToken,
-      lastLogin: new Date(),
-    });
+    await this.userService.update(
+      {
+        _id: user._id,
+        lastToken: accessToken,
+        lastLogin: new Date(),
+      },
+      user,
+    );
 
     return {
       access_token: accessToken,

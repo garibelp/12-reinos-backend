@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
@@ -9,6 +9,7 @@ import {
   UpdateUserInput,
   UpdateUserJwtInput,
 } from './user.input';
+import PermissionsEnum from 'src/enums/permissions.enum';
 
 @Injectable()
 export class UserService {
@@ -25,7 +26,13 @@ export class UserService {
     }).save();
   }
 
-  async update(payload: UpdateUserInput | UpdateUserJwtInput) {
+  async update(payload: UpdateUserInput | UpdateUserJwtInput, user: User) {
+    if (
+      !user.permissions.includes(PermissionsEnum.ADMIN) ||
+      user._id !== payload._id
+    ) {
+      throw new UnauthorizedException();
+    }
     return this.userModel
       .findByIdAndUpdate(payload._id, payload, {
         new: true,
