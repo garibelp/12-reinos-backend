@@ -33,3 +33,10 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+## Checking app documentation
+
+```bash
+# command to generate the documentation - after execution, open localhost:8080 to see the info
+$ npx @compodoc/compodoc -p tsconfig.json -s
+```
