@@ -20,9 +20,10 @@ export class CharacterResolver {
   @Query(() => Character)
   @UseGuards(GqlAuthGuard)
   async character(
+    @CurrentUser() user: User,
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ) {
-    return this.characterService.getById(_id);
+    return this.characterService.getById(_id, user);
   }
 
   @Query(() => [Character])
@@ -31,9 +32,7 @@ export class CharacterResolver {
     @CurrentUser() user: User,
     @Args('filters', { nullable: true }) filters?: ListCharacterInput,
   ) {
-    // TODO
-    console.log(user);
-    return this.characterService.list(filters);
+    return this.characterService.list(filters, user);
   }
 
   @Mutation(() => Character)
@@ -47,15 +46,19 @@ export class CharacterResolver {
 
   @Mutation(() => Character)
   @UseGuards(GqlAuthGuard)
-  async updateCharacter(@Args('payload') payload: UpdateCharacterInput) {
-    return this.characterService.update(payload);
+  async updateCharacter(
+    @CurrentUser() user: User,
+    @Args('payload') payload: UpdateCharacterInput,
+  ) {
+    return this.characterService.update(payload, user);
   }
 
   @Mutation(() => Character)
   @UseGuards(GqlAuthGuard)
   async deleteCharacter(
+    @CurrentUser() user: User,
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ) {
-    return this.characterService.delete(_id);
+    return this.characterService.delete(_id, user);
   }
 }
