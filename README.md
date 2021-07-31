@@ -15,23 +15,33 @@ Repository containing Backend from project 12 Reinos
 <li>MongoDB config url is located on file: src/app.module.ts </li>
 <li>MongoDB config url can also be set as an env variable DB_URL </li><br/>
 
+[Yarn](https://yarnpkg.com/) [Optional] - Package manager to be used instead npm
+
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
 ```
+
+## Current .env values
+
+To run this app, create a .env file on root directory containing the following information:
+
+<li>PORT: Port where backend is executed </li>
+<li>DB_URL: Connection URL of MongoDB </li>
+<li>JWT_SECRET: Secret key used to generate/validate the JWT tokens </li><br/>
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
 ## Checking app documentation
