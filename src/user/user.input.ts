@@ -49,10 +49,14 @@ export class UpdateUserInput {
   @MinLength(2)
   @IsNotEmpty()
   lastName?: string;
+}
 
-  @Field(() => String, { nullable: true })
+// Only internally used during login/refresh
+export class UpdateUserJwtInput {
+  @IsMongoId()
+  _id: MongooseSchema.Types.ObjectId;
+
   lastToken?: string;
 
-  @Field(() => String, { nullable: true })
   lastLogin?: Date;
 }
