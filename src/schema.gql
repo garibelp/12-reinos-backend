@@ -49,6 +49,8 @@ input CreateCharacterInput {
 
 input CreateUserInput {
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
 }
 
@@ -102,4 +104,6 @@ type User {
   _id: String!
   createdAt: DateTime!
   email: String!
+  firstName: String!
+  lastName: String!
 }

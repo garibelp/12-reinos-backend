@@ -13,6 +13,14 @@ export class User {
   @Prop({ unique: true })
   email: string;
 
+  @Field(() => String)
+  @Prop()
+  firstName: string;
+
+  @Field(() => String)
+  @Prop()
+  lastName: string;
+
   @Prop()
   password: string;
 

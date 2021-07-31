@@ -1,4 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
+import { IsMongoId } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 import AttributeEnum from 'src/enums/attributes.enum';
 
@@ -65,6 +66,7 @@ export class CreateCharacterInput {
 @InputType()
 export class ListCharacterInput {
   @Field(() => String, { nullable: true })
+  @IsMongoId()
   _id?: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
@@ -89,6 +91,7 @@ export class ListCharacterInput {
 @InputType()
 export class UpdateCharacterInput {
   @Field(() => String)
+  @IsMongoId()
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
