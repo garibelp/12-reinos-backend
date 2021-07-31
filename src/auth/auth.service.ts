@@ -22,18 +22,26 @@ export class AuthService {
     return isValidPassword ? user : null;
   }
 
-  login(user: User): { access_token: string } {
+  async login(user: User): Promise<{ access_token: string }> {
+    const accessToken = this.jwtService.sign({
+      email: user.email,
+      sub: user._id,
+    });
+
+    await this.userService.update({
+      _id: user._id,
+      lastToken: accessToken,
+      lastLogin: new Date(),
+    });
+
     return {
-      access_token: this.jwtService.sign({
-        email: user.email,
-        sub: user._id,
-      }),
+      access_token: accessToken,
     };
   }
 
   async verify(token: string) {
     const decodedUser = this.jwtService.verify(token, {
-      secret: 'test',
+      secret: String(process.env.JWT_SECRET),
     });
 
     const user = await this.userService.getByEmail(decodedUser.email);

@@ -14,7 +14,7 @@ import { AuthController } from './auth.controller';
     UserModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'test',
+      secret: String(process.env.JWT_SECRET),
       signOptions: {
         expiresIn: '3600s',
       },

@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
 import { User, UserDocument } from './model/user.model';
-import { CreateUserInput } from './user.input';
+import { CreateUserInput, UpdateUserInput } from './user.input';
 
 @Injectable()
 export class UserService {
@@ -18,8 +18,15 @@ export class UserService {
     return new this.userModel({
       ...payload,
       password: hashedPassword,
-      createdAt: new Date(),
     }).save();
+  }
+
+  async update(payload: UpdateUserInput) {
+    return this.userModel
+      .findByIdAndUpdate(payload._id, payload, {
+        new: true,
+      })
+      .exec();
   }
 
   getByEmail(email: string) {

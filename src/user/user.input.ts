@@ -1,11 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { Matches, MaxLength, MinLength } from 'class-validator';
+import { Schema as MongooseSchema } from 'mongoose';
+import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator';
 
 @InputType()
 export class CreateUserInput {
   @Field(() => String)
-  @MinLength(6)
-  @MaxLength(20)
+  @IsEmail()
   email: string;
 
   @Field(() => String)
@@ -15,4 +15,16 @@ export class CreateUserInput {
     message: 'password too weak',
   })
   password: string;
+}
+
+@InputType()
+export class UpdateUserInput {
+  @Field(() => String)
+  _id: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String, { nullable: true })
+  lastToken?: string;
+
+  @Field(() => String, { nullable: true })
+  lastLogin?: Date;
 }
