@@ -3,7 +3,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
 import AttributeEnum from 'src/enums/attributes.enum';
-import { User } from 'src/user/model/user.model';
 
 @ObjectType()
 @Schema()
