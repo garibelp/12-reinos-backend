@@ -28,7 +28,7 @@ export class UserService {
 
   async update(payload: UpdateUserInput | UpdateUserJwtInput, user: User) {
     if (
-      !user.permissions.includes(PermissionsEnum.ADMIN) ||
+      !user.permissions.includes(PermissionsEnum.ADMIN) &&
       user._id !== payload._id
     ) {
       throw new UnauthorizedException();
