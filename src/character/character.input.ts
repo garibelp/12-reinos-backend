@@ -66,7 +66,6 @@ export class CreateCharacterInput {
 @InputType()
 export class ListCharacterInput {
   @Field(() => String, { nullable: true })
-  @IsMongoId()
   _id?: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
