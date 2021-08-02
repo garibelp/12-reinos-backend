@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import * as randomToken from 'rand-token';
 
 import { User } from 'src/user/model/user.model';
 import { UserService } from 'src/user/user.service';
@@ -22,23 +23,33 @@ export class AuthService {
     return isValidPassword ? user : null;
   }
 
-  async login(user: User): Promise<{ access_token: string }> {
+  async login(
+    user: User,
+  ): Promise<{ access_token: string; refresh_token: string }> {
     const accessToken = this.jwtService.sign({
       email: user.email,
       sub: user._id,
     });
 
+    const refreshToken = randomToken.generate(64);
+
+    const refreshTokenExpire = new Date();
+    refreshTokenExpire.setDate(refreshTokenExpire.getDate() + 1);
+
+    const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
+
     await this.userService.update(
       {
         _id: user._id,
-        lastToken: accessToken,
-        lastLogin: new Date(),
+        refreshToken: hashedRefreshToken,
+        refreshTokenExpire,
       },
       user,
     );
 
     return {
       access_token: accessToken,
+      refresh_token: refreshToken,
     };
   }
 

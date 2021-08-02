@@ -32,10 +32,10 @@ export class User {
   permissions: [string];
 
   @Prop({ default: null })
-  lastToken?: string;
+  refreshToken?: string;
 
   @Prop({ type: Date, default: null })
-  lastLogin?: Date;
+  refreshTokenExpire?: Date;
 }
 
 export type UserDocument = User & Document;

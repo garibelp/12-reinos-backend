@@ -56,7 +56,7 @@ export class UpdateUserJwtInput {
   @IsMongoId()
   _id: MongooseSchema.Types.ObjectId;
 
-  lastToken?: string;
+  refreshToken?: string;
 
-  lastLogin?: Date;
+  refreshTokenExpire?: Date;
 }
