@@ -25,10 +25,7 @@ export class UserService {
   }
 
   async update(payload: UpdateUserInput | UpdateUserJwtInput, user: User) {
-    if (
-      !user.permissions.includes(RolesEnum.ADMIN) &&
-      user._id !== payload._id
-    ) {
+    if (!user.roles.includes(RolesEnum.ADMIN) && user._id !== payload._id) {
       throw new UnauthorizedException();
     }
     return this.userModel

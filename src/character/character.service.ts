@@ -17,7 +17,7 @@ export class CharacterService {
   ) {}
 
   async validateUser(charId: MongooseSchema.Types.ObjectId, user: User) {
-    if (user.permissions.includes(RolesEnum.ADMIN)) {
+    if (user.roles.includes(RolesEnum.ADMIN)) {
       return;
     }
 
@@ -48,7 +48,7 @@ export class CharacterService {
 
   list(filters: ListCharacterInput, user: User) {
     // Return all characters if is admin
-    if (user.permissions.includes(RolesEnum.ADMIN)) {
+    if (user.roles.includes(RolesEnum.ADMIN)) {
       return this.characterModel.find({ ...filters }).exec();
     }
     // Return only characters from user

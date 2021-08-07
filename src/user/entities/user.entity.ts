@@ -30,7 +30,7 @@ export class User {
   createdAt: Date;
 
   @Prop({ default: [RolesEnum.USER] })
-  permissions: [string];
+  roles: [string];
 
   @Prop({ default: null })
   refreshToken?: string;

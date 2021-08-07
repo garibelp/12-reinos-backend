@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Aptitude {
+  _id: String!
+  description: String!
+  name: String!
+}
+
 type Character {
   AST: [Int!]!
   CEL: [Int!]!
@@ -23,6 +29,11 @@ type Character {
   totalArmor: Int!
   totalLife: Int!
   totalMana: Int!
+}
+
+input CreateAptitudeInput {
+  description: String!
+  name: String!
 }
 
 input CreateCharacterInput {
@@ -70,16 +81,26 @@ input ListCharacterInput {
 }
 
 type Mutation {
+  createAptitude(payload: CreateAptitudeInput!): Aptitude!
   createCharacter(payload: CreateCharacterInput!): Character!
   createUser(payload: CreateUserInput!): User!
   deleteCharacter(_id: String!): Character!
+  removeAptitude(_id: String!): Aptitude!
+  updateAptitude(payload: UpdateAptitudeInput!): Aptitude!
   updateCharacter(payload: UpdateCharacterInput!): Character!
   updateUser(payload: UpdateUserInput!): User!
 }
 
 type Query {
+  aptitude(_id: String!): Aptitude!
   character(_id: String!): Character!
   characters(filters: ListCharacterInput): [Character!]!
+}
+
+input UpdateAptitudeInput {
+  _id: String!
+  description: String
+  name: String
 }
 
 input UpdateCharacterInput {
