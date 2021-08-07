@@ -1,15 +1,13 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
-import PermissionsEnum from 'src/enums/permissions.enum';
-import { User } from 'src/user/model/user.model';
 
-import {
-  CreateCharacterInput,
-  ListCharacterInput,
-  UpdateCharacterInput,
-} from './character.input';
-import { Character, CharacterDocument } from './model/character.model';
+import RolesEnum from 'src/enums/role.enum';
+import { User } from 'src/user/entities/user.entity';
+import { CreateCharacterInput } from './dto/create-character.input';
+import { ListCharacterInput } from './dto/list-character.input';
+import { UpdateCharacterInput } from './dto/update-character.input';
+import { Character, CharacterDocument } from './entities/character.entity';
 
 @Injectable()
 export class CharacterService {
@@ -19,7 +17,7 @@ export class CharacterService {
   ) {}
 
   async validateUser(charId: MongooseSchema.Types.ObjectId, user: User) {
-    if (user.permissions.includes(PermissionsEnum.ADMIN)) {
+    if (user.permissions.includes(RolesEnum.ADMIN)) {
       return;
     }
 
@@ -50,7 +48,7 @@ export class CharacterService {
 
   list(filters: ListCharacterInput, user: User) {
     // Return all characters if is admin
-    if (user.permissions.includes(PermissionsEnum.ADMIN)) {
+    if (user.permissions.includes(RolesEnum.ADMIN)) {
       return this.characterModel.find({ ...filters }).exec();
     }
     // Return only characters from user

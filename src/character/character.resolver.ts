@@ -3,15 +3,13 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 import { CurrentUser } from 'src/auth/current-user.decorator';
 import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
-import { User } from 'src/user/model/user.model';
+import { User } from 'src/user/entities/user.entity';
 
-import {
-  CreateCharacterInput,
-  ListCharacterInput,
-  UpdateCharacterInput,
-} from './character.input';
 import { CharacterService } from './character.service';
-import { Character } from './model/character.model';
+import { CreateCharacterInput } from './dto/create-character.input';
+import { ListCharacterInput } from './dto/list-character.input';
+import { UpdateCharacterInput } from './dto/update-character.input';
+import { Character } from './entities/character.entity';
 
 @Resolver()
 export class CharacterResolver {

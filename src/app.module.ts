@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation';
+import { AptitudeModule } from './aptitude/aptitude.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { validationSchema } from './config/validation';
     CharacterModule,
     UserModule,
     AuthModule,
+    AptitudeModule,
   ],
 })
 export class AppModule {}

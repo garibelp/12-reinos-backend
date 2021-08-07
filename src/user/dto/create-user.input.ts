@@ -1,8 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { Schema as MongooseSchema } from 'mongoose';
 import {
   IsEmail,
-  IsMongoId,
   IsNotEmpty,
   Matches,
   MaxLength,
@@ -32,31 +30,4 @@ export class CreateUserInput {
     message: 'password is too weak',
   })
   password: string;
-}
-
-@InputType()
-export class UpdateUserInput {
-  @Field(() => String)
-  @IsMongoId()
-  _id: MongooseSchema.Types.ObjectId;
-
-  @Field(() => String, { nullable: true })
-  @MinLength(2)
-  @IsNotEmpty()
-  firstName?: string;
-
-  @Field(() => String, { nullable: true })
-  @MinLength(2)
-  @IsNotEmpty()
-  lastName?: string;
-}
-
-// Only internally used during login/refresh
-export class UpdateUserJwtInput {
-  @IsMongoId()
-  _id: MongooseSchema.Types.ObjectId;
-
-  refreshToken?: string;
-
-  refreshTokenExpire?: Date;
 }
