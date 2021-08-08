@@ -48,5 +48,5 @@ $ yarn start:prod
 
 ```bash
 # command to generate the documentation - after execution, open localhost:8080 to see the info
-$ npx @compodoc/compodoc -p tsconfig.json -s
+$ yarn doc
 ```
