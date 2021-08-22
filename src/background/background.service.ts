@@ -18,19 +18,21 @@ export class BackgroundService {
   }
 
   findAll() {
-    return `This action returns all background`;
+    return this.backgroundModel.find().exec();
   }
 
   findOne(_id: MongooseSchema.Types.ObjectId) {
-    return `This action returns a #${_id} background`;
+    return this.backgroundModel.findById(_id).exec();
   }
 
-  update(updateBackgroundInput: UpdateBackgroundInput) {
-    const { _id } = updateBackgroundInput;
-    return `This action updates a #${_id} background`;
+  update(payload: UpdateBackgroundInput) {
+    const { _id } = payload;
+    return this.backgroundModel
+      .findByIdAndUpdate(_id, payload, { new: true })
+      .exec();
   }
 
   remove(_id: MongooseSchema.Types.ObjectId) {
-    return `This action removes a #${_id} background`;
+    return this.backgroundModel.findByIdAndDelete(_id).exec();
   }
 }

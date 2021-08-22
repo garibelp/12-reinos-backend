@@ -22,7 +22,7 @@ export class AptitudeResolver {
     return this.aptitudeService.create(payload);
   }
 
-  @Query(() => [Aptitude], { name: 'aptitude' })
+  @Query(() => [Aptitude], { name: 'aptitudes' })
   findAll() {
     return this.aptitudeService.findAll();
   }

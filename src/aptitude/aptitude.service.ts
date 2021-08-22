@@ -18,19 +18,21 @@ export class AptitudeService {
   }
 
   findAll() {
-    return `This action returns all aptitude`;
+    return this.aptitudeModel.find().exec();
   }
 
-  findOne(id: MongooseSchema.Types.ObjectId) {
-    return `This action returns a #${id} aptitude`;
+  findOne(_id: MongooseSchema.Types.ObjectId) {
+    return this.aptitudeModel.findById(_id).exec();
   }
 
-  update(updateAptitudeInput: UpdateAptitudeInput) {
-    const { _id } = updateAptitudeInput;
-    return `This action updates a #${_id} aptitude`;
+  update(payload: UpdateAptitudeInput) {
+    const { _id } = payload;
+    return this.aptitudeModel
+      .findByIdAndUpdate(_id, payload, { new: true })
+      .exec();
   }
 
   remove(_id: MongooseSchema.Types.ObjectId) {
-    return `This action removes a #${_id} aptitude`;
+    return this.aptitudeModel.findByIdAndDelete(_id).exec();
   }
 }

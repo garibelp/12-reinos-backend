@@ -123,7 +123,9 @@ type Mutation {
 
 type Query {
   aptitude(_id: String!): Aptitude!
+  aptitudes: [Aptitude!]!
   background(_id: String!): Background!
+  backgrounds: [Background!]!
   character(_id: String!): Character!
   characters(filters: ListCharacterInput): [Character!]!
 }
