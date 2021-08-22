@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
 
-import RolesEnum from 'src/enums/role.enum';
+import RolesEnum from 'src/enums/roles.enum';
 import { User } from 'src/user/entities/user.entity';
 import { CreateCharacterInput } from './dto/create-character.input';
 import { ListCharacterInput } from './dto/list-character.input';

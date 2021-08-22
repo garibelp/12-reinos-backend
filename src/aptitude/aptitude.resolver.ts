@@ -9,7 +9,7 @@ import { UpdateAptitudeInput } from './dto/update-aptitude.input';
 import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
-import RolesEnum from 'src/enums/role.enum';
+import RolesEnum from 'src/enums/roles.enum';
 
 @Resolver(() => Aptitude)
 @UseGuards(GqlAuthGuard, RolesGuard)

@@ -11,6 +11,7 @@ import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation';
 import { AptitudeModule } from './aptitude/aptitude.module';
 import { BackgroundModule } from './background/background.module';
+import { RaceModule } from './race/race.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { BackgroundModule } from './background/background.module';
     AuthModule,
     AptitudeModule,
     BackgroundModule,
+    RaceModule,
   ],
 })
 export class AppModule {}

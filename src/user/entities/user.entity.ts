@@ -2,7 +2,7 @@ import { Field, ObjectType, GraphQLISODateTime } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
-import RolesEnum from 'src/enums/role.enum';
+import RolesEnum from 'src/enums/roles.enum';
 
 @ObjectType()
 @Schema()
@@ -30,7 +30,7 @@ export class User {
   createdAt: Date;
 
   @Prop({ default: [RolesEnum.USER] })
-  roles: [string];
+  roles: [RolesEnum];
 
   @Prop({ default: null })
   refreshToken?: string;

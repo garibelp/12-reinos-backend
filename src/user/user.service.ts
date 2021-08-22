@@ -7,7 +7,7 @@ import { User, UserDocument } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UpdateUserJwtInput } from './dto/update-user-jwt.input';
-import RolesEnum from 'src/enums/role.enum';
+import RolesEnum from 'src/enums/roles.enum';
 
 @Injectable()
 export class UserService {
