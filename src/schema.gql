@@ -16,17 +16,17 @@ type Background {
 }
 
 type BonusAttribute {
-  AST: Int!
-  CEL: Int!
-  INT: Int!
-  TEN: Int!
+  AST: Int
+  CEL: Int
+  INT: Int
+  TEN: Int
 }
 
 input BonusAttributeInput {
-  AST: Int!
-  CEL: Int!
-  INT: Int!
-  TEN: Int!
+  AST: Int
+  CEL: Int
+  INT: Int
+  TEN: Int
 }
 
 type Character {
