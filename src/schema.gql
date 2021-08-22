@@ -85,6 +85,16 @@ input CreateCharacterInput {
   totalMana: Int!
 }
 
+input CreateGraduationInput {
+  armor: Int!
+  bonusAttr: BonusAttributeInput!
+  hitDice: String!
+  life: Int!
+  mana: Int!
+  name: String!
+  skills: [SkillInput!]!
+}
+
 input CreateRaceInput {
   age: String!
   con: RaceCharacteristicInput!
@@ -106,6 +116,17 @@ input CreateUserInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type Graduation {
+  _id: String!
+  armor: Int!
+  bonusAttr: BonusAttribute!
+  hitDice: String!
+  life: Int!
+  mana: Int!
+  name: String!
+  skills: [Skill!]!
+}
 
 enum LanguagesEnum {
   ANAO
@@ -131,15 +152,18 @@ type Mutation {
   createAptitude(payload: CreateAptitudeInput!): Aptitude!
   createBackground(payload: CreateBackgroundInput!): Background!
   createCharacter(payload: CreateCharacterInput!): Character!
+  createGraduation(payload: CreateGraduationInput!): Graduation!
   createRace(payload: CreateRaceInput!): Race!
   createUser(payload: CreateUserInput!): User!
   deleteCharacter(_id: String!): Character!
   removeAptitude(_id: String!): Aptitude!
   removeBackground(_id: String!): Background!
+  removeGraduation(_id: String!): Graduation!
   removeRace(_id: String!): Race!
   updateAptitude(payload: UpdateAptitudeInput!): Aptitude!
   updateBackground(payload: UpdateBackgroundInput!): Background!
   updateCharacter(payload: UpdateCharacterInput!): Character!
+  updateGraduation(payload: UpdateGraduationInput!): Graduation!
   updateRace(payload: UpdateRaceInput!): Race!
   updateUser(payload: UpdateUserInput!): User!
 }
@@ -151,6 +175,8 @@ type Query {
   backgrounds: [Background!]!
   character(_id: String!): Character!
   characters(filters: ListCharacterInput): [Character!]!
+  graduation(_id: String!): Graduation!
+  graduations: [Graduation!]!
   race(_id: String!): Race!
   races: [Race!]!
 }
@@ -185,6 +211,24 @@ enum SizeEnum {
   PEQUENO
 }
 
+type Skill {
+  conjuration: String
+  cost: Int!
+  description: String!
+  distance: Int
+  level: Int!
+  name: String!
+}
+
+input SkillInput {
+  conjuration: String
+  cost: Int!
+  description: String!
+  distance: Int
+  level: Int!
+  name: String!
+}
+
 input UpdateAptitudeInput {
   _id: String!
   description: String
@@ -215,6 +259,17 @@ input UpdateCharacterInput {
   totalArmor: Int
   totalLife: Int
   totalMana: Int
+}
+
+input UpdateGraduationInput {
+  _id: String!
+  armor: Int
+  bonusAttr: BonusAttributeInput
+  hitDice: String
+  life: Int
+  mana: Int
+  name: String
+  skills: [SkillInput!]
 }
 
 input UpdateRaceInput {
