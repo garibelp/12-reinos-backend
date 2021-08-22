@@ -1,7 +1,8 @@
 import { Field, ObjectType, GraphQLISODateTime } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import PermissionsEnum from 'src/enums/permissions.enum';
+
+import RolesEnum from 'src/enums/roles.enum';
 
 @ObjectType()
 @Schema()
@@ -28,8 +29,8 @@ export class User {
   @Prop({ type: Date, default: new Date() })
   createdAt: Date;
 
-  @Prop({ default: [PermissionsEnum.USER] })
-  permissions: [string];
+  @Prop({ default: [RolesEnum.USER] })
+  roles: [RolesEnum];
 
   @Prop({ default: null })
   refreshToken?: string;

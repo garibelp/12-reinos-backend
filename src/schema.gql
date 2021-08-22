@@ -2,6 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Aptitude {
+  _id: String!
+  description: String!
+  name: String!
+}
+
+type Background {
+  _id: String!
+  bond: String!
+  bonusAttr: BonusAttribute!
+  name: String!
+}
+
+type BonusAttribute {
+  AST: Int
+  CEL: Int
+  INT: Int
+  TEN: Int
+}
+
+input BonusAttributeInput {
+  AST: Int
+  CEL: Int
+  INT: Int
+  TEN: Int
+}
+
 type Character {
   AST: [Int!]!
   CEL: [Int!]!
@@ -23,6 +50,17 @@ type Character {
   totalArmor: Int!
   totalLife: Int!
   totalMana: Int!
+}
+
+input CreateAptitudeInput {
+  description: String!
+  name: String!
+}
+
+input CreateBackgroundInput {
+  bond: String!
+  bonusAttr: BonusAttributeInput!
+  name: String!
 }
 
 input CreateCharacterInput {
@@ -47,6 +85,26 @@ input CreateCharacterInput {
   totalMana: Int!
 }
 
+input CreateGraduationInput {
+  armor: Int!
+  bonusAttr: BonusAttributeInput!
+  hitDice: String!
+  life: Int!
+  mana: Int!
+  name: String!
+  skills: [SkillInput!]!
+}
+
+input CreateRaceInput {
+  age: String!
+  con: RaceCharacteristicInput!
+  languages: [LanguagesEnum!]!
+  movement: Int!
+  name: String!
+  pro: RaceCharacteristicInput!
+  size: SizeEnum!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String!
@@ -59,6 +117,27 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Graduation {
+  _id: String!
+  armor: Int!
+  bonusAttr: BonusAttribute!
+  hitDice: String!
+  life: Int!
+  mana: Int!
+  name: String!
+  skills: [Skill!]!
+}
+
+enum LanguagesEnum {
+  ANAO
+  ANGUISA
+  COGNI
+  COMUM
+  ELFO
+  EXTRA
+  GIGASSE
+}
+
 input ListCharacterInput {
   _id: String
   background: String
@@ -70,16 +149,97 @@ input ListCharacterInput {
 }
 
 type Mutation {
+  createAptitude(payload: CreateAptitudeInput!): Aptitude!
+  createBackground(payload: CreateBackgroundInput!): Background!
   createCharacter(payload: CreateCharacterInput!): Character!
+  createGraduation(payload: CreateGraduationInput!): Graduation!
+  createRace(payload: CreateRaceInput!): Race!
   createUser(payload: CreateUserInput!): User!
   deleteCharacter(_id: String!): Character!
+  removeAptitude(_id: String!): Aptitude!
+  removeBackground(_id: String!): Background!
+  removeGraduation(_id: String!): Graduation!
+  removeRace(_id: String!): Race!
+  updateAptitude(payload: UpdateAptitudeInput!): Aptitude!
+  updateBackground(payload: UpdateBackgroundInput!): Background!
   updateCharacter(payload: UpdateCharacterInput!): Character!
+  updateGraduation(payload: UpdateGraduationInput!): Graduation!
+  updateRace(payload: UpdateRaceInput!): Race!
   updateUser(payload: UpdateUserInput!): User!
 }
 
 type Query {
+  aptitude(_id: String!): Aptitude!
+  aptitudes: [Aptitude!]!
+  background(_id: String!): Background!
+  backgrounds: [Background!]!
   character(_id: String!): Character!
   characters(filters: ListCharacterInput): [Character!]!
+  graduation(_id: String!): Graduation!
+  graduations: [Graduation!]!
+  race(_id: String!): Race!
+  races: [Race!]!
+}
+
+type Race {
+  _id: String!
+  age: String!
+  con: RaceCharacteristic!
+  languages: [LanguagesEnum!]!
+  movement: Int!
+  name: String!
+  pro: RaceCharacteristic!
+  size: SizeEnum!
+}
+
+type RaceCharacteristic {
+  description: String!
+  name: String!
+}
+
+input RaceCharacteristicInput {
+  description: String!
+  name: String!
+}
+
+enum SizeEnum {
+  ENORME
+  GRANDE
+  IMENSO
+  MEDIO
+  MIUDO
+  PEQUENO
+}
+
+type Skill {
+  conjuration: String
+  cost: Int!
+  description: String!
+  distance: Int
+  level: Int!
+  name: String!
+}
+
+input SkillInput {
+  conjuration: String
+  cost: Int!
+  description: String!
+  distance: Int
+  level: Int!
+  name: String!
+}
+
+input UpdateAptitudeInput {
+  _id: String!
+  description: String
+  name: String
+}
+
+input UpdateBackgroundInput {
+  _id: String!
+  bond: String
+  bonusAttr: BonusAttributeInput
+  name: String
 }
 
 input UpdateCharacterInput {
@@ -99,6 +259,28 @@ input UpdateCharacterInput {
   totalArmor: Int
   totalLife: Int
   totalMana: Int
+}
+
+input UpdateGraduationInput {
+  _id: String!
+  armor: Int
+  bonusAttr: BonusAttributeInput
+  hitDice: String
+  life: Int
+  mana: Int
+  name: String
+  skills: [SkillInput!]
+}
+
+input UpdateRaceInput {
+  _id: String!
+  age: String
+  con: RaceCharacteristicInput
+  languages: [LanguagesEnum!]
+  movement: Int
+  name: String
+  pro: RaceCharacteristicInput
+  size: SizeEnum
 }
 
 input UpdateUserInput {

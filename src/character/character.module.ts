@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { Character, CharacterSchema } from './model/character.model';
+import { Character, CharacterSchema } from './entities/character.entity';
 import { CharacterService } from './character.service';
 import { CharacterResolver } from './character.resolver';
 

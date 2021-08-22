@@ -1,24 +1,22 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
-import { CurrentUser } from 'src/auth/current-user.decorator';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
-import { User } from 'src/user/model/user.model';
+import { User } from 'src/user/entities/user.entity';
 
-import {
-  CreateCharacterInput,
-  ListCharacterInput,
-  UpdateCharacterInput,
-} from './character.input';
 import { CharacterService } from './character.service';
-import { Character } from './model/character.model';
+import { CreateCharacterInput } from './dto/create-character.input';
+import { ListCharacterInput } from './dto/list-character.input';
+import { UpdateCharacterInput } from './dto/update-character.input';
+import { Character } from './entities/character.entity';
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class CharacterResolver {
   constructor(private readonly characterService: CharacterService) {}
 
   @Query(() => Character)
-  @UseGuards(GqlAuthGuard)
   async character(
     @CurrentUser() user: User,
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
@@ -27,7 +25,6 @@ export class CharacterResolver {
   }
 
   @Query(() => [Character])
-  @UseGuards(GqlAuthGuard)
   async characters(
     @CurrentUser() user: User,
     @Args('filters', { nullable: true }) filters?: ListCharacterInput,
@@ -36,7 +33,6 @@ export class CharacterResolver {
   }
 
   @Mutation(() => Character)
-  @UseGuards(GqlAuthGuard)
   async createCharacter(
     @CurrentUser() user: User,
     @Args('payload') payload: CreateCharacterInput,
@@ -45,7 +41,6 @@ export class CharacterResolver {
   }
 
   @Mutation(() => Character)
-  @UseGuards(GqlAuthGuard)
   async updateCharacter(
     @CurrentUser() user: User,
     @Args('payload') payload: UpdateCharacterInput,
@@ -54,7 +49,6 @@ export class CharacterResolver {
   }
 
   @Mutation(() => Character)
-  @UseGuards(GqlAuthGuard)
   async deleteCharacter(
     @CurrentUser() user: User,
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,

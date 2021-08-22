@@ -9,6 +9,10 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation';
+import { AptitudeModule } from './aptitude/aptitude.module';
+import { BackgroundModule } from './background/background.module';
+import { RaceModule } from './race/race.module';
+import { GraduationModule } from './graduation/graduation.module';
 
 @Module({
   imports: [
@@ -28,6 +32,10 @@ import { validationSchema } from './config/validation';
     CharacterModule,
     UserModule,
     AuthModule,
+    AptitudeModule,
+    BackgroundModule,
+    RaceModule,
+    GraduationModule,
   ],
 })
 export class AppModule {}

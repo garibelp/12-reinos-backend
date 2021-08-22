@@ -3,13 +3,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
-import { User, UserDocument } from './model/user.model';
-import {
-  CreateUserInput,
-  UpdateUserInput,
-  UpdateUserJwtInput,
-} from './user.input';
-import PermissionsEnum from 'src/enums/permissions.enum';
+import { User, UserDocument } from './entities/user.entity';
+import { CreateUserInput } from './dto/create-user.input';
+import { UpdateUserInput } from './dto/update-user.input';
+import { UpdateUserJwtInput } from './dto/update-user-jwt.input';
+import RolesEnum from 'src/enums/roles.enum';
 
 @Injectable()
 export class UserService {
@@ -27,10 +25,7 @@ export class UserService {
   }
 
   async update(payload: UpdateUserInput | UpdateUserJwtInput, user: User) {
-    if (
-      !user.permissions.includes(PermissionsEnum.ADMIN) &&
-      user._id !== payload._id
-    ) {
+    if (!user.roles.includes(RolesEnum.ADMIN) && user._id !== payload._id) {
       throw new UnauthorizedException();
     }
     return this.userModel
