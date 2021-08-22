@@ -8,6 +8,27 @@ type Aptitude {
   name: String!
 }
 
+type Background {
+  _id: String!
+  bond: String!
+  bonusAttr: BonusAttribute!
+  name: String!
+}
+
+type BonusAttribute {
+  AST: Int!
+  CEL: Int!
+  INT: Int!
+  TEN: Int!
+}
+
+input BonusAttributeInput {
+  AST: Int!
+  CEL: Int!
+  INT: Int!
+  TEN: Int!
+}
+
 type Character {
   AST: [Int!]!
   CEL: [Int!]!
@@ -33,6 +54,12 @@ type Character {
 
 input CreateAptitudeInput {
   description: String!
+  name: String!
+}
+
+input CreateBackgroundInput {
+  bond: String!
+  bonusAttr: BonusAttributeInput!
   name: String!
 }
 
@@ -82,17 +109,21 @@ input ListCharacterInput {
 
 type Mutation {
   createAptitude(payload: CreateAptitudeInput!): Aptitude!
+  createBackground(payload: CreateBackgroundInput!): Background!
   createCharacter(payload: CreateCharacterInput!): Character!
   createUser(payload: CreateUserInput!): User!
   deleteCharacter(_id: String!): Character!
   removeAptitude(_id: String!): Aptitude!
+  removeBackground(_id: String!): Background!
   updateAptitude(payload: UpdateAptitudeInput!): Aptitude!
+  updateBackground(payload: UpdateBackgroundInput!): Background!
   updateCharacter(payload: UpdateCharacterInput!): Character!
   updateUser(payload: UpdateUserInput!): User!
 }
 
 type Query {
   aptitude(_id: String!): Aptitude!
+  background(_id: String!): Background!
   character(_id: String!): Character!
   characters(filters: ListCharacterInput): [Character!]!
 }
@@ -100,6 +131,13 @@ type Query {
 input UpdateAptitudeInput {
   _id: String!
   description: String
+  name: String
+}
+
+input UpdateBackgroundInput {
+  _id: String!
+  bond: String
+  bonusAttr: BonusAttributeInput
   name: String
 }
 

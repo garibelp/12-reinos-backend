@@ -1,10 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { BonusAttribute } from 'src/shared/entities/bonus-attribute';
 
 @ObjectType()
 @Schema()
-export class Aptitude {
+export class Background {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 
@@ -12,10 +13,14 @@ export class Aptitude {
   @Prop({ unique: true })
   name: string;
 
+  @Field(() => BonusAttribute)
+  @Prop()
+  bonusAttr: BonusAttribute;
+
   @Field(() => String)
   @Prop()
-  description: string;
+  bond: string;
 }
 
-export type AptitudeDocument = Aptitude & Document;
-export const AptitudeSchema = SchemaFactory.createForClass(Aptitude);
+export type BackgroundDocument = Background & Document;
+export const BackgroundSchema = SchemaFactory.createForClass(Background);

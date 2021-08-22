@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation';
 import { AptitudeModule } from './aptitude/aptitude.module';
+import { BackgroundModule } from './background/background.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { AptitudeModule } from './aptitude/aptitude.module';
     UserModule,
     AuthModule,
     AptitudeModule,
+    BackgroundModule,
   ],
 })
 export class AppModule {}
